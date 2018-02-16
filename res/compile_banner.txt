@@ -1,0 +1,9 @@
+                
+  ____________   XugCiv     ___________
+ |                                     |
+ | A civilization building game        |
+ |                                     |
+ |                                     |
+ | Created by Matti Kauppila, 2018     |
+ |_____________________________________|
+

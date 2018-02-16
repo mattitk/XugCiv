@@ -1,0 +1,36 @@
+CC=gcc
+CFLAGS=-Wall
+GLOBALS_DIR=src/globals/
+DATABASE_DIR=src/database/
+OBJ=src/globals/main src/database/xugfile
+XUGFILE_OBJS=$(addsuffix .o, $(OBJ))
+XUGFILE_SRC=$(addsuffix .c, $(OBJ))
+EXECUTABLE=xugfile
+BACKUP_EXECUTABLE=.xugfile_backup
+DEPS=$(DATABASE_DIR)xugfile.h
+INCLUDES=
+
+LIB=-lncurses
+CUSTOMDEFINES = -DUSE_NCURSES
+
+all: $(OBJS) console_version
+
+console_version: $(XUGFILE_SRC) $(DEPS)
+	@echo Compiling Console Version ...
+	@$(CC) $(XUGFILE_OBJS) -o $(EXECUTABLE)
+
+$(OBJS): $<.c
+	@echo Compiling $<.c ...
+	$(CC) $(CFLAGS) -c -o $@ $< -I $(INCLUDES)
+
+clean:
+	@echo Removing old build ,,,
+	@rm -f $(XUGFILE_OBJS) $(EXECUTABLE)
+
+new: top_banner clean $(XUGFILE_OBJS) console_version
+
+top_banner:	
+	@echo 
+	@echo Making a new build.
+	@echo -------------------
+	@echo

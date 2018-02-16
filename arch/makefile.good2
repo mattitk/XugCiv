@@ -1,0 +1,27 @@
+CC=g++
+CFLAGS=-c -Wall
+GLOBALS_DIR=src/globals/
+DATABASE_DIR=src/database/
+OBJ=src/console_ui/console_ui src/globals/main src/database/xugfile src/database/xugdirectory src/network/server src/network/client
+XUGFILE_OBJS=$(addsuffix .o, $(OBJ))
+XUGFILE_SRC=$(addsuffix .cpp, $(OBJ))
+EXECUTABLE=xuglocker
+DEPS=$(DATABASE_DIR)xugfile.h
+DEFINES=-DUSE_NCURSES
+LIBS=-lncurses
+
+all: $(XUGFILE_OBJS) console_version
+
+server:
+	DEFINES=$(DEFINES) -DSERVER_BUILD
+
+client:
+	DEFINES=$(DEFINES) -DCLIENT_BUILD
+
+console_version: $(XUGFILE_SRC) $(DEPS)
+	$(CC) $(XUGFILE_OBJS) -o $(EXECUTABLE) $(DEFINES) $(LIBS)
+
+$(OBJ): 
+	$(CC) $@.cpp $< -o $@ $(CFLAGS) $(DEFINES) $(LIBS)
+clean:
+	rm -f $(XUGFILE_OBJS) $(EXECUTABLE)

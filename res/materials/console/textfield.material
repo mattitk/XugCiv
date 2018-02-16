@@ -1,0 +1,16 @@
+// eka testi
+{
+a="_"
+b="|"
+caption=str("Window")
+}
+{
+	void frag(pos)
+	{
+
+	if(pos.x == 0 && pos.y == 0) return (" ",0, 0);
+	if(pos.x == 0 && pos.y == 0) return (" ",0, 0);
+	if(pos.x == 0 && pos.y == 0) return (" ",0, 0);
+	if(pos.x == 0 && pos.y == 0) return (" ",0, 0);
+	}
+}

@@ -1,0 +1,19 @@
+CC=gcc
+CFLAGS=-c -Wall
+GLOBALS_DIR=src/globals/
+DATABASE_DIR=src/database/
+OBJ=src/globals/main src/database/xugfile
+XUGFILE_OBJS=$(addsuffix .o, $(OBJ))
+XUGFILE_SRC=$(addsuffix .c, $(OBJ))
+EXECUTABLE=xugfile
+DEPS=$(DATABASE_DIR)xugfile.h
+
+
+all: $(XUGFILE_OBJS) console_version
+
+console_version: $(XUGFILE_SRC) $(DEPS)
+	$(CC) $(XUGFILE_OBJS) -o $(EXECUTABLE)
+$(OBJ): 
+	$(CC) $@.c $< -o $@ $(CFLAGS)
+clean:
+	rm -f $(XUGFILE_OBJS) $(EXECUTABLE)

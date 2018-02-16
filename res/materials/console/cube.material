@@ -1,0 +1,5 @@
+material_type=0
+texture_string="@%+'."
+color_list=3,2,1,0
+name="Cube Material"
+
