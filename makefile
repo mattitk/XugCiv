@@ -9,9 +9,10 @@ DATABASE_DIR=src/database/
 GLOBAL_OBJS = src/globals/main src/globals/timer
 INDIE_OBJ = src/globals/set_version src/globals/increment_build_count
 CONSOLE_OBJS = src/console_ui/console_ui src/console_ui/console_sprite src/console_ui/console_material
+SDL_OBJS = src/sdl_ui/sdl_handler
 DATABASE_OBJS = src/database/xugfile src/database/xugdirectory
 NETWORK_OBJS = src/network/server src/network/client
-OBJ=$(GLOBAL_OBJS) $(DATABASE_OBJS) $(NETWORK_OBJS) $(CONSOLE_OBJS)
+OBJ=$(GLOBAL_OBJS) $(DATABASE_OBJS) $(NETWORK_OBJS) $(CONSOLE_OBJS) $(SDL_OBJS)
 XUGFILE_OBJS=$(addsuffix .o, $(OBJ))
 XUGFILE_SRC=$(addsuffix .cpp, $(OBJ))
 INDIE_OBJS=$(addsuffix .c, $(INDIE_OBJ)
@@ -25,13 +26,13 @@ INCREMENT_BUILD_COUNT_EXECUTABLE=$(BIN)increment_build_count
 SET_VERSION_EXECUTABLE=$(BIN)set_version
 DEPS=$(DATABASE_DIR)xugfile.h
 DEFINES=-DUSE_NCURSES
-LIBS=-lncurses
+LIBS=-lncurses -lSDL2
 
 all: $(OBJ) console_version console_server console_client refresh_version compile_banner
 
 $(OBJ):
 	@echo Compiling $@ ...
-	@$(CC) $@.cpp -c -o $@.o $(CFLAGS) $(LIBS) $(DEFINES) 
+	@$(CC) $@.cpp -c -o $@.o $(CFLAGS) $(LIBS) $(DEFINES)
 
 oldall: $(OBJS) console_version console_server console_client refresh_version compile_banner
 
@@ -62,7 +63,7 @@ fresh_banner:
 	@echo
 	@echo Performing a fresh compile
 	@echo ...
-	@echo 
+	@echo
 
 console_server: $(XUGFILE_SRC) $(DEPS)
 	@echo Compiling the server ...
