@@ -15,7 +15,8 @@
 class SDL_Handler
 {
   private:
-  PropertyStruct spriteProperties, windowProperties;
+  std::vector<PropertyStruct *> spriteProperties;
+  WindowProperties windowProperties;
   SDL_Window *window;
   SDL_Surface *screenSurface;
   std::vector<SDL_Surface> sprite;
