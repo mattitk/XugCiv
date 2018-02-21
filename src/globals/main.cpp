@@ -7,9 +7,8 @@
 #include "../console_ui/console_material.h"
 #include "../console_ui/console_ui.h"
 #include "../console_ui/console_window.h"
-#include "../world/map.h"
-#include "../ai/ai.h"
-#include "../ai/animal_ai.h"
+#include "../world/world.h"
+#include "../ai/ai_includes.h"
 #include <chrono>
 #include <thread>
 
@@ -55,11 +54,12 @@ int main_loop()
 int main(int argc, char **argv)
 {
 	int value=0;
-	ConsoleWindow ww;
+	//ConsoleWindow ww;	MEMORY VIOLATION - FIX
 //	w.LoadStyle("res/styles/basic.style");
+	AI *ai = new Animal_AI();
 
 	std::vector<PropertyStruct *> values; // = new std::vector<PropertyStruct *>();
-	if(LoadConfig("res/config.cfg", &values))
+	if(LoadConfig("config.cfg", &values))
 	{
 		printf("Loading config failed. Going for defaults.\n");
 	};
@@ -77,9 +77,9 @@ int main(int argc, char **argv)
 				printf("%s = %f\n", values[j]->key, values[j]->floating_value);
 		}
 	}
-
-	//ui.init();
-	//value=main_loop();
+	ui.init();
+	value=main_loop();
 	if(value == 1) return 1;
+	delete(&ai);
 	return 0;
 }

@@ -30,7 +30,7 @@ protected:
 
   // dynamic
   std::vector<Actor *> nearby_actors;
-
+public:
   Animal_AI()
   {
     decision_cooldown = 0;

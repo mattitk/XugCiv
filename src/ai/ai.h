@@ -5,6 +5,7 @@ class AI
 {
   protected:
     int type;
+  public:
     virtual int Poll();
     virtual int Trigger();
 };

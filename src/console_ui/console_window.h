@@ -1,6 +1,10 @@
 #ifndef __CONSOLE_WINDOW_H__
 #define __CONSOLE_WINDOW_H__
 
+/*
+ TODO: LOCATE MEMORY VIOLATION
+*/
+
 #include <vector>
 
 #include "console_textfield.h"
