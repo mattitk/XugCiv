@@ -26,7 +26,9 @@ INCREMENT_BUILD_COUNT_EXECUTABLE=$(BIN)increment_build_count
 SET_VERSION_EXECUTABLE=$(BIN)set_version
 DEPS=$(DATABASE_DIR)xugfile.h
 DEFINES=-DUSE_NCURSES -DWINDOWS
-LIBS=-lncurses
+
+LIBS_WINDOWS=-lWs2_32 -lMswsock -lAdvApi32
+LIBS=-lncurses -lSDL2 -lSDL2main $(LIBS_WINDOWS)
 
 all: $(OBJ) console_version console_server console_client refresh_version compile_banner
 

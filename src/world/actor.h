@@ -3,10 +3,10 @@
 
 class Actor
 {
-	float lat, lon;
-	int sector;
-	int x,y;
+	protected:
+		float lat, lon;
+		int sector;
+		int x,y;
 };
 
 #endif
-
