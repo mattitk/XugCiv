@@ -2,7 +2,6 @@
 #define __CONSOLE_H__
 
 #include "../globals/main.h"
-#include <ncurses.h>
 #include <stdlib.h>
 #include <string.h>
 #include <vector>
@@ -18,7 +17,7 @@ class ConsoleUI
 	int enabled;
 	int xsize, ysize;
 
-	char colors;	
+	char colors;
 
 	int input_cursor;
 	int input_max_size;
@@ -26,7 +25,7 @@ class ConsoleUI
 	void backspace();
 	void get_input(char ch);
 
-	int active_window = -1;	
+	int active_window = -1;
 
 	char *buffer;
 	char *colbuffer;
@@ -36,7 +35,7 @@ class ConsoleUI
 	~ConsoleUI();
 	void SetBoundaries(int ysize, int xsize);
 	int SetActiveWindow(int handle);
-	int CreateWindow(std::string name, int x, int y, int xsize, int ysize);
+	int CreateConsoleWindow(std::string name, int x, int y, int xsize, int ysize);
 	int poll();
 	int render();
 	int draw();

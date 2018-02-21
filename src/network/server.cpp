@@ -1,6 +1,6 @@
 #include "server.h"
 #include "../globals/log.h"
-
+#include <fcntl.h>
 Server::Server()
 {
 	int j;
@@ -8,17 +8,26 @@ Server::Server()
 	port=1235;
 
 	Console = 0;
-	
+
+
+//	#ifdef WINDOWS
+//		for(j=0;j<max_conns;++j)clientSocket_W[j]=0;
+	//	serverSocket_W = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	//#endif
+
+
 	for(j=0;j<max_conns;++j)clientSocket[j]=0;
-	
 	serverSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-	
-	fcntl(serverSocket, F_SETFL, O_NONBLOCK);
+
+	#ifdef LINUX
+		fcntl(serverSocket, F_SETFL, O_NONBLOCK);
+	#endif
+
 	memset(&serverSocketAddress, 0, sizeof(serverSocketAddress));
 	serverSocketAddress.sin_family = AF_INET;
 	serverSocketAddress.sin_addr.s_addr = htonl(INADDR_ANY);
 	serverSocketAddress.sin_port = htons(port);
-	
+
 }
 
 int Server::setActiveSocket(int s)

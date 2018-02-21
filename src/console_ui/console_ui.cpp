@@ -25,7 +25,7 @@ int ConsoleUI::init()
 
 	buffer = (char*) malloc(xsize*ysize*sizeof(char));
 	colbuffer = (char*) malloc(xsize*ysize*sizeof(char));
-	
+
 	keypad(mainwin, TRUE);
 	//cbreak();
 	timeout(0);
@@ -57,7 +57,7 @@ int ConsoleUI::SetActiveWindow(int handle)
 	return 0;
 }
 
-int ConsoleUI::CreateWindow(std::string name = "Default", int x=0, int y=0, int xsize = 32, int ysize = 10)
+int ConsoleUI::CreateConsoleWindow(std::string name = "Default", int x=0, int y=0, int xsize = 32, int ysize = 10)
 {
 	ConsoleWindow *w = new ConsoleWindow();
 	if(!w) return 1;
@@ -70,7 +70,7 @@ int ConsoleUI::draw()
 	int x,y, a;
 	char backgroundchars[]="  '. , `                 ";
 	int backgroundchars_length=strlen(backgroundchars);
-	
+
 	for(y=0;y<ysize;++y)
 	for(x=0;x<xsize;++x)
 	{
@@ -78,9 +78,9 @@ int ConsoleUI::draw()
 		buffer[y*xsize+x] = backgroundchars[a];
 		colbuffer[y*xsize+x] = 3;
 	}
-	
+
 	//sprintf(buffer,"> %s", input);
-	
+
 	return 0;
 }
 
@@ -105,7 +105,7 @@ int ConsoleUI::render()
 }
 
 int ConsoleUI::evaluate_input()
-{	
+{
 	//int size = input_cursor;
 	if(strcmp(input, "moi")) return 1;
 	return 0;
@@ -121,7 +121,7 @@ void ConsoleUI::get_input(char ch)
 
 void ConsoleUI::backspace()
 {
-	
+
 	if(--input_cursor<0)input_cursor=0;
 	input[input_cursor]=' ';
 

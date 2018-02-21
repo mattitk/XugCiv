@@ -22,11 +22,11 @@ class ConsoleWindow
 	std::vector<void*> elements;
 	std::vector<unsigned int> input_handles;
 	std::vector<unsigned int> button_handles;
-	std::vector<unsigned int> text_handles;	
+	std::vector<unsigned int> text_handles;
 
 	ConsoleWindow()
 	{
-		
+
 		memset(p.name,0,255);
 		sprintf(p.name, "My Window");
 		p.x=5;
@@ -67,7 +67,7 @@ class ConsoleWindow
 			}
 		}
 	}
-	
+
 	void SetStyle(ConsoleWindowStyle *s)
 	{
 		if(style)free(style);
@@ -88,7 +88,7 @@ class ConsoleWindow
 		memcpy(&p.name, &prop->name, 255);
 		return 0;
 	}
-	
+
 	int AddInput(ConsoleInput *in)
 	{
 		elements.push_back((ConsoleInput *)in);

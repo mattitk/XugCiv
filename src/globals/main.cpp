@@ -3,7 +3,7 @@
 #include "../globals/timer.h"
 #include "../globals/parser.h"
 #include "../network/server.h"
-#include "../network/client.h"
+//#include "../network/client.h"
 #include "../console_ui/console_material.h"
 #include "../console_ui/console_ui.h"
 #include "../console_ui/console_window.h"
@@ -13,23 +13,23 @@
 int Server_Main()
 {
 	int quit=0, a =0;
-	Server server;
-	server.start();
+	//Server server;
+	//server.start();
 	while(!quit)
 	{
-		a = server.poll();
+		//a = server.poll();
 		if(a==2)quit=1;
 	}
-	server.stop();
+	//server.stop();
 	return 1;
 //	__int128 jee;
 }
 
 void Client_Main()
 {
-	Client c;
-	c.connect_to_port("127.0.0.1",1235);
-	printf("Connected to socket %d", c.socketfd);	
+	//Client c;
+	//c.connect_to_port("127.0.0.1",1235);
+	//printf("Connected to socket %d", c.socketfd);
 }
 
 ConsoleUI ui;
@@ -49,7 +49,7 @@ int main_loop()
 }
 
 int main(int argc, char **argv)
-{	
+{
 	int value=0;
 	ConsoleWindow ww;
 //	w.LoadStyle("res/styles/basic.style");

@@ -1,13 +1,24 @@
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
 
-#include <stdio.h>
-#include <string.h>
+#ifdef LINUX
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#endif
+
+#ifdef WINDOWS
+#include <windows.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#pragma comment (lib, "Ws2_32.lib");
+#endif
+
+#include <stdio.h>
+#include <string.h>
+
 
 #include <vector>
 #include <string>
@@ -37,5 +48,4 @@ class Client
 	void poll();
 	int connect_to_port(std::string ipstring, int port);
 };
-
 #endif
