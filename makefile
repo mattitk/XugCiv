@@ -28,7 +28,7 @@ DEPS=$(DATABASE_DIR)xugfile.h
 DEFINES=-DUSE_NCURSES -DWINDOWS
 
 LIBS_WINDOWS=-lWs2_32 -lMswsock -lAdvApi32
-LIBS=-lncurses -lSDL2 -lSDL2main $(LIBS_WINDOWS)
+LIBS=-lmingw32 -lncurses -lSDL2 -lSDL2main -lSDL2_image $(LIBS_WINDOWS)
 
 all: $(OBJ) console_version console_server console_client refresh_version compile_banner
 
