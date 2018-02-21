@@ -38,15 +38,14 @@ class ConsoleWindow
 		p.xsize=35;
 		p.ysize=7;
 		p.scale=1;
-		InitBackground();
+	//	InitBackground();
 	}
 
 	void InitBackground()
 	{
 		if(background)free(background);
-                background=(char *)malloc(p.xsize*p.ysize*sizeof(char));
-                memset(background, ' ', p.xsize*p.ysize);
-
+    background=(char *)malloc(p.xsize*p.ysize*sizeof(char)+1);
+    memset(background, ' ', p.xsize*p.ysize);
 	}
 
 	~ConsoleWindow()
@@ -60,7 +59,7 @@ class ConsoleWindow
 		if(style)free(style);
 		style=(ConsoleWindowStyle *)malloc(sizeof(ConsoleWindowStyle));
 		std::vector<PropertyStruct *> values;
-        	LoadConfig(filename.c_str(), &values);
+    LoadConfig(filename.c_str(), &values);
 		for(unsigned int i=0;i<values.size();++i)
 		{
 			if(strcmp(values[i]->key, "style_name"))

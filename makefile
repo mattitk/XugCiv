@@ -12,7 +12,7 @@ CONSOLE_OBJS = src/console_ui/console_ui src/console_ui/console_sprite src/conso
 SDL_OBJS = src/sdl_ui/sdl_handler
 DATABASE_OBJS = src/database/xugfile src/database/xugdirectory
 NETWORK_OBJS = src/network/server src/network/client
-OBJ=$(GLOBAL_OBJS) $(DATABASE_OBJS) $(NETWORK_OBJS) $(CONSOLE_OBJS) $(SDL_OBJS)
+OBJ=$(GLOBAL_OBJS) $(DATABASE_OBJS) $(NETWORK_OBJS) $(CONSOLE_OBJS)
 XUGFILE_OBJS=$(addsuffix .o, $(OBJ))
 XUGFILE_SRC=$(addsuffix .cpp, $(OBJ))
 INDIE_OBJS=$(addsuffix .c, $(INDIE_OBJ)
@@ -78,7 +78,7 @@ console_client: $(XUGFILE_SRC) $(DEPS)
 
 console_version: $(XUGFILE_SRC) $(DEPS)
 	@echo Compiling the full version ...
-	@$(CC) $(XUGFILE_OBJS) -o $(EXECUTABLE) $(DEFINES) $(LIBS) $(CFLAGS_MAIN)
+	@$(CC) -mwindows $(XUGFILE_OBJS) -o $(EXECUTABLE) $(DEFINES) $(LIBS) $(CFLAGS_MAIN)
 
 
 clean:

@@ -4,6 +4,7 @@
 #include "../globals/parser.h"
 #include "../network/server.h"
 //#include "../network/client.h"
+//#include "../sdl_ui/sdl_handler.h"
 #include "../console_ui/console_material.h"
 #include "../console_ui/console_ui.h"
 #include "../console_ui/console_window.h"
@@ -54,9 +55,11 @@ int main_loop()
 int main(int argc, char **argv)
 {
 	int value=0;
-	//ConsoleWindow ww;	MEMORY VIOLATION - FIX
+	ConsoleWindow *ww = new ConsoleWindow();
 //	w.LoadStyle("res/styles/basic.style");
 	AI *ai = new Animal_AI();
+	//SDL_Handler XUG_SDL;
+	//XUG_SDL.Init();
 
 	std::vector<PropertyStruct *> values; // = new std::vector<PropertyStruct *>();
 	if(LoadConfig("config.cfg", &values))
