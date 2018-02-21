@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "city.h"
+#include "item.h"
 #include "unit.h"
 #include "terrain.h"
 #include "weather.h"

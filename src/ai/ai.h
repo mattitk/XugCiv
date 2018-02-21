@@ -5,8 +5,8 @@ class AI
 {
   protected:
     int type;
-    virtual int Evaluate();
-
+    virtual int Poll();
+    virtual int Trigger();
 };
 
 #endif

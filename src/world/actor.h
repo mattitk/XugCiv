@@ -7,6 +7,7 @@ class Actor
 		float lat, lon;
 		int sector;
 		int x,y;
+		Actor *parent;
 };
 
 #endif

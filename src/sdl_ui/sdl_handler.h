@@ -10,6 +10,7 @@
 #include "../globals/main.h"
 #include "../globals/structs.h"
 #include "../globals/parser.h"
+#include "../sdl_ui/sprite.h"
 
 
 class SDL_Handler
@@ -27,7 +28,7 @@ class SDL_Handler
   bool LoadSprites()
   {
 
-      LoadConfig("sprites.cfg", &spriteProperties);
+    LoadConfig("sprites.cfg", &spriteProperties);
       //INIT_SPRITES
     return true;
   }

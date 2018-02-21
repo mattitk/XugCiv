@@ -3,7 +3,14 @@
 
 class Item : public Actor
 {
-  
+public:
+  Actor *carrier;
+  std::string name = "Generic Item";
+  float weight;
+  Item()
+  {
+    carrier = 0;
+  }
 };
 
 #endif

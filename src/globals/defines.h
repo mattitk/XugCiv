@@ -12,3 +12,8 @@
 #define CONSOLE_GREEN	3
 #define CONSOLE_BLUE	4
 #define CONSOLE_WHITE	5
+
+#define RACE_HUMAN 0
+#define RACE_DOG 1
+#define RACE_HORSE 2
+#define RACE_ORC 3

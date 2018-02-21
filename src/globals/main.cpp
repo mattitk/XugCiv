@@ -7,6 +7,9 @@
 #include "../console_ui/console_material.h"
 #include "../console_ui/console_ui.h"
 #include "../console_ui/console_window.h"
+#include "../world/map.h"
+#include "../ai/ai.h"
+#include "../ai/animal_ai.h"
 #include <chrono>
 #include <thread>
 
