@@ -33,6 +33,7 @@ void Client_Main()
 }
 
 ConsoleUI ui;
+Logger log;
 Timer timer;
 //Parser parser;
 int main_loop()
@@ -55,7 +56,10 @@ int main(int argc, char **argv)
 //	w.LoadStyle("res/styles/basic.style");
 
 	std::vector<PropertyStruct *> values; // = new std::vector<PropertyStruct *>();
-	LoadConfig("res/config.cfg", &values);
+	if(LoadConfig("res/config.cfg", &values))
+	{
+		printf("Loading config failed. Going for defaults.\n");
+	};
 	for(unsigned int j=0;j<values.size();++j)
 	{
 		switch(values[j]->type)

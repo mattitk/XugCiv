@@ -15,6 +15,8 @@
 static int LoadConfig(std::string filename, std::vector<PropertyStruct *> *properties)
 {
 	FILE *f = fopen(filename.c_str(), "r");
+	if(!f) return 1;
+
 	int eof=0, escape=0, state=0, string =0;
 	char ch;
 	char type='i';
@@ -23,12 +25,9 @@ static int LoadConfig(std::string filename, std::vector<PropertyStruct *> *prope
 	PropertyStruct *p;
 	char keyBuf[256];
 	memset(&buf,0,255); memset(&keyBuf,0,255);
-	
-		
-	if(!f) return 0;
-  	
+
 	while(!eof)
-	{ 
+	{
   	ch = fgetc(f);
 		switch(ch)
 		{

@@ -16,6 +16,7 @@ class SDL_Handler
 {
   private:
   std::vector<PropertyStruct *> spriteProperties;
+  std::vector<PropertyStruct *> videoProperties;
   WindowProperties windowProperties;
   SDL_Window *window;
   SDL_Surface *screenSurface;
@@ -25,6 +26,9 @@ class SDL_Handler
 
   bool LoadSprites()
   {
+
+      LoadConfig("sprites.cfg", &spriteProperties);
+      //INIT_SPRITES
     return true;
   }
 
@@ -38,8 +42,21 @@ class SDL_Handler
   }
   void Init()
   {
+    LoadConfig("video_config.cfg", &videoProperties );
     SDL_Init(SDL_INIT_VIDEO);
   }
+
+  void Start()
+  {
+    if(!window)
+    {
+        window =  SDL_CreateWindow(APPLICATION_NAME,
+          windowProperties.x, windowProperties.y,
+          windowProperties.xsize, windowProperties.ysize
+        ,  SDL_WINDOW_SHOWN);
+    }
+  }
+
   void DeInit()
   {
     SDL_Quit();

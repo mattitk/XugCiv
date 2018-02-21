@@ -7,6 +7,8 @@
 #include <vector>
 #include <string>
 
+#include "../globals/defines.h"
+
 class LogField
 {
 	public:
@@ -30,6 +32,33 @@ class Logger
 	std::string getLogText(unsigned int index){
 		if(index<field.size())return field[index]->buffer;
 	}
+
+	void FlushLogToFile(char *filename)
+	{
+		FILE *f = fopen(filename, "r");
+		char logtext[1025];
+		memset(logtext, 0, 1024);
+		fprintf(f,"+_ %s log", APPLICATION_NAME);
+
+		for(unsigned int i=0;i<field.size();++i)
+		{
+			//" %llu, (%d), [%d], \"%s\"\n",i , field[i]->timeStamp, field[i]->type, field[i]->value, field[i]->buffer.c_str());
+			switch(field[i]->type)
+			{
+				case LOG_ENTRY_TEXT:
+					sprintf(logtext, "%d: %s\n", i, field[i]->buffer.c_str());
+					break;
+				case LOG_ENTRY_NUMBER_WITH_TEXT:
+					sprintf(logtext, "%d: %s -> %ld" ,i, field[i]->buffer.c_str(), field[i]->value);
+					break;
+			}
+			fprintf(f,logtext);
+			memset(logtext,0,1024);
+		}
+		fprintf(f, "+_ %s log terminated", APPLICATION_NAME);
+		fclose(f);
+	}
+
 	long int getLogValue(unsigned int index)
 	{
 		if(index<field.size())return field[index]->value;
