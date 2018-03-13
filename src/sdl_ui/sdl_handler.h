@@ -75,24 +75,22 @@ class SDL_Handler
 
   void Init()
   {
-    LoadConfig("video_config.cfg", &videoProperties);
-    CheckVideoProperties(videoProperties);
+    //LoadConfig("video_config.cfg", &videoProperties);
+    //CheckVideoProperties(videoProperties);
     //LoadConfig("last_session.cfg", &recoveryProperties);
-    SDL_Init(SDL_INIT_VIDEO);
+    //printf("%d " ,SDL_Init(SDL_INIT_VIDEO));
   }
 
 
 
   void Start()
   {
-    if(!window[0])
-    {
-        window[0] = (SDL_Window *)malloc(sizeof(SDL_Window*));
-        window[0] =  SDL_CreateWindow(APPLICATION_NAME,
-          windowProperties.x, windowProperties.y,
-          windowProperties.xsize, windowProperties.ysize
-        ,  SDL_WINDOW_SHOWN);
-    }
+    //window[0] = (SDL_Window *)malloc(sizeof(SDL_Window*));
+      /*  window[0] =  SDL_CreateWindow("PEPPPE",
+          100, 100,
+          800, 600
+        ,  SDL_WINDOW_OPENGL);
+*/
   }
 
   void DeInit()
@@ -102,14 +100,8 @@ class SDL_Handler
 };
 
 int SDL_Handler::Refresh()
-{
-  int event_main_type = 0;
-  int counter = 0;
-  while(counter++ < sdl_poll_retries || event_main_type)
-  {
-      event_main_type = SDL_PollEvent(&e);
-  }
-  switch(event_main_type)
+{/*
+  switch(SDL_PollEvent(&e))
   {
     case SDL_QUIT:
       quit = true;
@@ -126,8 +118,8 @@ int SDL_Handler::Refresh()
   if(windowActive[8] == true) SDL_UpdateWindowSurface(window[8]);
   if(windowActive[9] == true) SDL_UpdateWindowSurface(window[9]);
   if(windowActive[10] == true) SDL_UpdateWindowSurface(window[10]);
-  if(quit == true) return 420;
-  return 0;
+  if(quit == true) return 420;*/
+  return 420;
 }
 
 #endif
