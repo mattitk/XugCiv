@@ -1,5 +1,15 @@
 #include "console_ui.h"
 
+int ConsoleUI::deinit()
+{
+	if(buffer)free(buffer);
+
+	if(colbuffer)free(colbuffer);
+	//WINDOW *mainwin;
+	//std::vector<ConsoleWindow*> win;
+	return 0;
+}
+
 ConsoleUI::ConsoleUI()
 {
 	enabled = false;

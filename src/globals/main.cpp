@@ -1,13 +1,20 @@
 #include "main.h"
 #include "../globals/structs.h"
+#include "../globals/config.h"
 #include "../globals/timer.h"
 #include "../globals/parser.h"
-#include "../network/server.h"
-//#include "../network/client.h"
-//#include "../sdl_ui/sdl_handler.h"
-#include "../console_ui/console_material.h"
-#include "../console_ui/console_ui.h"
-#include "../console_ui/console_window.h"
+#ifdef USE_NETWORK
+	#include "../network/server.h"
+	//#include "../network/client.h"
+#endif
+#ifdef USE_SDL
+	#include "../sdl_ui/sdl_handler.h"
+#endif
+#ifdef USE_NCURSES
+	#include "../console_ui/console_material.h"
+	#include "../console_ui/console_ui.h"
+	#include "../console_ui/console_window.h"
+#endif
 #include "../world/world.h"
 #include "../ai/ai_includes.h"
 #include <chrono>
@@ -36,8 +43,10 @@ void Client_Main()
 }
 
 ConsoleUI ui;
-Logger log;
+Logger logger;
 Timer timer;
+SDL_Handler XUG_SDL;
+
 //Parser parser;
 int main_loop()
 {
@@ -52,36 +61,39 @@ int main_loop()
 	return quit;
 }
 
+int sdl_main_loop()
+{
+	int quit=0;
+	while(!quit)
+	{
+		quit = XUG_SDL.Refresh();
+		//ui.draw();
+		//ui.render();
+		//quit=ui.poll();
+	}
+	return quit;
+}
+
+
 int main(int argc, char **argv)
 {
 	int value=0;
 	ConsoleWindow *ww = new ConsoleWindow();
 //	w.LoadStyle("res/styles/basic.style");
 	AI *ai = new Animal_AI();
-	//SDL_Handler XUG_SDL;
-	//XUG_SDL.Init();
-
-	std::vector<PropertyStruct *> values; // = new std::vector<PropertyStruct *>();
-	if(LoadConfig("config.cfg", &values))
-	{
-		printf("Loading config failed. Going for defaults.\n");
-	};
-	for(unsigned int j=0;j<values.size();++j)
-	{
-		switch(values[j]->type)
-		{
-			case 's':
-				printf("%s = \"%s\"\n", values[j]->key, values[j]->value);
-				break;
-			case 'i':
-				printf("%s = %ld\n", values[j]->key, values[j]->numerical_value);
-				break;
-			case 'f':
-				printf("%s = %f\n", values[j]->key, values[j]->floating_value);
-		}
-	}
+if(MAIN_INTERFACE == 0)
+{
+	XUG_SDL.Init();
+	XUG_SDL.Start();
+	value=main_loop();
+	XUG_SDL.DeInit();
+}
+else if(MAIN_INTERFACE == 1)
+{
 	ui.init();
 	value=main_loop();
+	ui.deinit();
+}
 	if(value == 1) return 1;
 	delete(&ai);
 	return 0;

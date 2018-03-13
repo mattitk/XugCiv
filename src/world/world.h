@@ -16,7 +16,7 @@ class World
 {
 private:
   Map *worldMap;
-
+  std::vector<Weather *> weather;
   std::vector<Actor *> actors;
   std::vector<Unit *> units;
   std::vector<Item *> items;

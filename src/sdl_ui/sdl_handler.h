@@ -19,6 +19,10 @@ class SDL_Handler
   std::vector<PropertyStruct *> spriteProperties;
   std::vector<PropertyStruct *> videoProperties;
   WindowProperties windowProperties;
+
+  bool quit = false;
+  int sdl_poll_retries = 8;
+  SDL_Event e;
   SDL_Window *window[32];
   bool windowActive[32];
   int SDL_GFX_SYSTEM = 0;
@@ -27,7 +31,7 @@ class SDL_Handler
 
   public:
 
-  void Refresh();
+  int Refresh();
 
   bool LoadSprites()
   {
@@ -48,8 +52,7 @@ class SDL_Handler
 
   void FallBackToConsole()
   {
-    printf("ALERT!");
-    exit(0);
+    printf("ALERT! Falling back to console .... in the future\n");
   }
 
   void CheckVideoProperties(std::vector<PropertyStruct*> pr)
@@ -84,6 +87,7 @@ class SDL_Handler
   {
     if(!window[0])
     {
+        window[0] = (SDL_Window *)malloc(sizeof(SDL_Window*));
         window[0] =  SDL_CreateWindow(APPLICATION_NAME,
           windowProperties.x, windowProperties.y,
           windowProperties.xsize, windowProperties.ysize
@@ -97,8 +101,20 @@ class SDL_Handler
   }
 };
 
-void SDL_Handler::Refresh()
+int SDL_Handler::Refresh()
 {
+  int event_main_type = 0;
+  int counter = 0;
+  while(counter++ < sdl_poll_retries || event_main_type)
+  {
+      event_main_type = SDL_PollEvent(&e);
+  }
+  switch(event_main_type)
+  {
+    case SDL_QUIT:
+      quit = true;
+      break;
+  }
   if(windowActive[0] == true) SDL_UpdateWindowSurface(window[0]);
   if(windowActive[1] == true) SDL_UpdateWindowSurface(window[1]);
   if(windowActive[2] == true) SDL_UpdateWindowSurface(window[2]);
@@ -110,6 +126,8 @@ void SDL_Handler::Refresh()
   if(windowActive[8] == true) SDL_UpdateWindowSurface(window[8]);
   if(windowActive[9] == true) SDL_UpdateWindowSurface(window[9]);
   if(windowActive[10] == true) SDL_UpdateWindowSurface(window[10]);
+  if(quit == true) return 420;
+  return 0;
 }
 
 #endif

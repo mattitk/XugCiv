@@ -25,7 +25,7 @@ CLIENT_EXECUTABLE=$(BIN)$(SOFTWARE_NAME)_client
 INCREMENT_BUILD_COUNT_EXECUTABLE=$(BIN)increment_build_count
 SET_VERSION_EXECUTABLE=$(BIN)set_version
 DEPS=$(DATABASE_DIR)xugfile.h
-DEFINES=-DUSE_NCURSES -DLINUX
+DEFINES=-DUSE_SDL -DUSE_NCURSES -DUSE_NETWORK -DLINUX
 
 LIBS_WINDOWS=-lWs2_32 -lMswsock -lAdvApi32
 LIBS=-lncurses -lSDL2 -lSDL2main
@@ -70,7 +70,6 @@ fresh_banner:
 console_server: $(XUGFILE_SRC) $(DEPS)
 	@echo Compiling the server ...
 	@$(CC) $(XUGFILE_OBJS) -o $(SERVER_EXECUTABLE) $(DEFINES) $(LIBS) $(CFLAGS)
-
 
 console_client: $(XUGFILE_SRC) $(DEPS)
 	@echo Compiling the client ...

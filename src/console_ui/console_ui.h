@@ -41,6 +41,8 @@ class ConsoleUI
 	int draw();
 	int evaluate_input();
 	int init();
+	int deinit();
+	
 };
 
 #endif
