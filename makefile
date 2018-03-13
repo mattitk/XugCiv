@@ -25,10 +25,10 @@ CLIENT_EXECUTABLE=$(BIN)$(SOFTWARE_NAME)_client
 INCREMENT_BUILD_COUNT_EXECUTABLE=$(BIN)increment_build_count
 SET_VERSION_EXECUTABLE=$(BIN)set_version
 DEPS=$(DATABASE_DIR)xugfile.h
-DEFINES=-DUSE_NCURSES -DWINDOWS
+DEFINES=-DUSE_NCURSES -DLINUX
 
 LIBS_WINDOWS=-lWs2_32 -lMswsock -lAdvApi32
-LIBS=-lmingw32 -lncurses -lSDL2 -lSDL2main -lSDL2_image $(LIBS_WINDOWS)
+LIBS=-lncurses -lSDL2 -lSDL2main
 
 all: $(OBJ) console_version console_server console_client refresh_version compile_banner
 
@@ -78,7 +78,7 @@ console_client: $(XUGFILE_SRC) $(DEPS)
 
 console_version: $(XUGFILE_SRC) $(DEPS)
 	@echo Compiling the full version ...
-	@$(CC) -mwindows $(XUGFILE_OBJS) -o $(EXECUTABLE) $(DEFINES) $(LIBS) $(CFLAGS_MAIN)
+	@$(CC) $(XUGFILE_OBJS) -o $(EXECUTABLE) $(DEFINES) $(LIBS) $(CFLAGS_MAIN)
 
 
 clean:

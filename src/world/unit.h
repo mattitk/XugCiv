@@ -6,22 +6,45 @@
 #include "actor.h"
 #include "item.h"
 
+#include "wound.h"
+
 class Unit : public Actor
 {
   private:
+    bool gender;
+    bool pregnant;
+    bool fertile;
+    unsigned int age;
+    unsigned short birthday;
     int race;
+    //World *world;
     AI *ai;
     Actor *mount;
-    std::vector<Item*> inv;
     //std::vector<Skill *> skills;
-    int eq_slots[16];
-    int xp;
+    unsigned int *eq_slots;
+    unsigned int xp;
     int str;
     int dex;
     int spd;
     float carried_weight;
+    unsigned int hunger;
+    std::vector<Item*> inv;
+    std::vector<Wound*> wounds;
+    std::vector<Unit*> mounted_units;
 
   public:
+
+    void ReserveMemory()
+    {
+      if(race == RACE_HUMAN) eq_slots = new unsigned int[16];
+      else eq_slots = new unsigned int[1];
+    }
+
+    void FreeMemory()
+    {
+      delete(eq_slots);
+    }
+
     Unit()
     {
       mount = 0;
@@ -32,6 +55,8 @@ class Unit : public Actor
       spd = 1;
       carried_weight = 0.0;
       race = RACE_HUMAN;
+      ReserveMemory();
+      FreeMemory();
     }
 
     void BindAi(AI *ai)

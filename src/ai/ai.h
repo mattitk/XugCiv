@@ -6,8 +6,8 @@ class AI
   protected:
     int type;
   public:
-    virtual int Poll();
-    virtual int Trigger();
+    //virtual int Poll();
+    //virtual int Trigger();
 };
 
 #endif

@@ -52,7 +52,7 @@ class Logger
 					sprintf(logtext, "%d: %s -> %ld" ,i, field[i]->buffer.c_str(), field[i]->value);
 					break;
 			}
-			fprintf(f,logtext);
+			fprintf(f,"%s", logtext);
 			memset(logtext,0,1024);
 		}
 		fprintf(f, "+_ %s log terminated", APPLICATION_NAME);
